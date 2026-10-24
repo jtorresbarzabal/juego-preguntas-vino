@@ -111,7 +111,7 @@ input::placeholder,textarea::placeholder{color:#8B7680}
 /* ===== sala de espera ===== */
 .lobby-grid{display:grid;grid-template-columns:minmax(0,26rem) minmax(0,1fr);gap:2.2rem;flex:1;align-items:start}
 .join-card{align-items:center;gap:.7rem;text-align:center}
-.qrw{width:100%;max-width:21rem;padding:.85rem;
+.qrw{width:100%;max-width:15.5rem;padding:.7rem;
   background:
    linear-gradient(var(--gold),var(--gold)) 0 0/1.6rem 2px no-repeat,linear-gradient(var(--gold),var(--gold)) 0 0/2px 1.6rem no-repeat,
    linear-gradient(var(--gold),var(--gold)) 100% 0/1.6rem 2px no-repeat,linear-gradient(var(--gold),var(--gold)) 100% 0/2px 1.6rem no-repeat,
@@ -121,8 +121,10 @@ input::placeholder,textarea::placeholder{color:#8B7680}
 .qr svg{width:100%;height:100%;display:block}
 .qr.wait{background:var(--panel2);color:var(--mute);font-weight:700;text-align:center}
 .join-card .eyebrow{width:100%}
-.code{width:100%;font:800 5.2rem/1 var(--disp);letter-spacing:.14em;text-indent:.14em;color:var(--gold);padding:.12em 0;border-block:1px solid var(--line2);background:linear-gradient(90deg,transparent,rgba(227,185,91,.07),transparent)}
-.url{color:var(--mute);font-size:.9rem;word-break:break-all}
+.code{width:100%;font:800 4.4rem/1 var(--disp);letter-spacing:.14em;text-indent:.14em;color:var(--gold);padding:.12em 0;border-block:1px solid var(--line2);background:linear-gradient(90deg,transparent,rgba(227,185,91,.07),transparent)}
+.url{color:var(--gold2);font-size:1.25rem;font-weight:800;word-break:break-all}
+.how{color:var(--mute);font-size:.95rem}
+.how b{color:var(--fg)}
 .net{font-weight:700;font-size:.95rem}
 .net.ok{color:var(--ok)} .net.err{color:var(--bad)}
 .who-top{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
@@ -365,7 +367,7 @@ dialog .dl-act{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:flex-end;ma
 
   <div class="spacer"></div>
   <footer>
-    <button class="link" id="b-student" type="button">Soy alumno: entrar con un código</button>
+    <button class="link" id="b-student" type="button">Soy alumno: tengo un código de sala</button>
     <form id="stu-form" class="stu" hidden>
       <label for="stu-code" class="note">Código de la sala</label>
       <input id="stu-code" type="text" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="K7QM">
@@ -424,9 +426,10 @@ Explicación: Lo habitual es entre 6 y 8 °C.</pre>
     <section class="join-card">
       <p class="eyebrow center">Entra desde el móvil</p>
       <div class="qrw"><div class="qr wait" id="l-qr" role="img" aria-label="Código QR para entrar en la sala">Preparando sala…</div></div>
-      <p class="eyebrow center">o escribe el código</p>
-      <p class="code" id="l-code">····</p>
+      <p class="eyebrow center">o sin QR</p>
       <p class="url" id="l-url"></p>
+      <p class="how">Entra en esa dirección, pulsa <b>«Soy alumno»</b> y escribe este código:</p>
+      <p class="code" id="l-code">····</p>
       <p class="net" id="l-net" role="status"></p>
     </section>
     <section>
@@ -3602,7 +3605,7 @@ function renderLobby() {
   if (ready) {
     var url = baseUrl() + '?sala=' + roomCode;
     renderQR(url);
-    $('#l-url').textContent = location.protocol === 'file:' ? 'Abre esta página desde su dirección web (GitHub Pages) para que los móviles puedan entrar.' : url.replace(/^https?:\/\//, '');
+    $('#l-url').textContent = location.protocol === 'file:' ? 'Abre esta página desde su dirección web (GitHub Pages) para que los móviles puedan entrar.' : baseUrl().replace(/^https?:\/\//, '');
   } else { $('#l-url').textContent = ''; }
   var players = game ? Array.from(game.players.values()) : [];
   $('#l-count').textContent = String(players.length);
